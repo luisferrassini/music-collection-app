@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 <label>Artist</label>
                                 <select class="form-control" name="artist">
-                                    <option value="{{ $album->artist }}" selected>{{ $artistName }}</option>
+                                    <option value="{{ $album->artist }}" selected>{{ $album->artist }}</option>
                                     @foreach( $artistList as $a )
                                         @if($a['id'] != $album->artist)
                                             <option value="{{ $a['id'] }}">{{ $a['name'] }}</option>

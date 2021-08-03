@@ -33,8 +33,8 @@ class AlbumController extends Controller
         $album = Album::findOrFail($id);
         $artistListController = new ArtistListController;
         $artistList = $artistListController->getList();
-        $artistName = $artistListController->get($album->artist)[0]['name'];
-        return view('albums.form', ['album' => $album, 'artistList' => $artistList, 'artistName' => $artistName]);
+        $album->artist = $artistListController->get($album->artist)[0]['name'];
+        return view('albums.form', ['album' => $album, 'artistList' => $artistList]);
     }
 
     public function update(Request $request, $id) {
