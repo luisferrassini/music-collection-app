@@ -22,7 +22,7 @@ class ArtistListController extends Controller
     public function get($id) {
         $json = Http::withHeaders([
             'Basic' => env('ARTIST_LIST_API_KEY', false)
-        ])->get(env('ARTIST_LIST_API_URL', false).$id)->json(); // API não retorna como esperado
+        ])->get(env('ARTIST_LIST_API_URL', false).'/?id='.$id)->json(); // API não retorna como esperado
         $array = array();
         foreach($json as $data) {
             if($data[0]['id'] == $id) {
