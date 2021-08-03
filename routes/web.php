@@ -22,11 +22,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
-Route::get('/albums', [AlbumController::class, 'index'])->middleware('auth');
-Route::get('/albums/new', [AlbumController::class, 'new'])->middleware('auth');
-Route::post('/albums/create', [AlbumController::class, 'create'])->middleware('auth');
-Route::get('/album/{id}/edit', [AlbumController::class, 'edit'])->middleware('auth');
-Route::post('/albums/update/{id}', [AlbumController::class, 'update'])->middleware('auth');
-Route::delete('/albums/delete/{id}', [AlbumController::class, 'delete'])->middleware('auth');
-Route::get('/artistList', [ArtistListController::class, 'getList'])->middleware('auth');
-Route::get('/artist/{id}', [ArtistListController::class, 'get'])->middleware('auth');
+Route::group(['middleware' => 'auth'], function () { 
+    Route::get('/albums', [AlbumController::class, 'index']);
+    Route::get('/albums/new', [AlbumController::class, 'new']);
+    Route::post('/albums/create', [AlbumController::class, 'create']);
+    Route::get('/album/{id}/edit', [AlbumController::class, 'edit']);
+    Route::post('/albums/update/{id}', [AlbumController::class, 'update']);
+    Route::delete('/albums/delete/{id}', [AlbumController::class, 'delete']);
+    Route::get('/artistList', [ArtistListController::class, 'getList']);
+    Route::get('/artist/{id}', [ArtistListController::class, 'get']);
+});
