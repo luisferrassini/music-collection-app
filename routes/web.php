@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AlbumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/', [HomeController::class, 'index']);
+    Auth::routes();
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/albums', [AlbumController::class, 'index'])->middleware('auth');
+Route::get('/albums/new', [AlbumController::class, 'new'])->middleware('auth');
+Route::post('/albums/create', [AlbumController::class, 'create'])->middleware('auth');
+Route::get('/album/{id}/edit', [AlbumController::class, 'edit'])->middleware('auth');
+Route::post('/albums/update/{id}', [AlbumController::class, 'update'])->middleware('auth');
+Route::delete('/albums/delete/{id}', [AlbumController::class, 'delete'])->middleware('auth');
