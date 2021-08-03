@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use Redirect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AlbumController extends Controller
 {
@@ -43,7 +44,9 @@ class AlbumController extends Controller
         return Redirect::to('/albums');
     }
 
-    public function delete($id){
+    public function delete($id) {
+        if(Auth::user()->role != 'admin') // current user cannot delete albums
+            return Redirect::to('/albums');
         $album = Album::findOrFail($id);
         $album->delete();
         return Redirect::to('/albums');
