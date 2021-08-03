@@ -22,11 +22,13 @@ class ArtistListController extends Controller
     public function get($id) {
         $json = Http::withHeaders([
             'Basic' => 'ZGV2ZWxvcGVyOlpHVjJaV3h2Y0dWeQ=='
-        ])->get('https://moat.ai/api/task/?id='.$id)->json(); //????
+        ])->get('https://moat.ai/api/task/?id='.$id)->json(); // API não retorna como esperado
         $array = array();
         foreach($json as $data) {
-            if($data[0]['id'] == $id)
+            if($data[0]['id'] == $id) {
                 $array[] = $data[0];
+                break;
+            }
         }
         return $array;
     }
