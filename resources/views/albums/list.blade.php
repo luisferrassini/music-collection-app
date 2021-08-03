@@ -23,7 +23,9 @@
                             <th scope="col">Year</th>
                             <th scope="col">Artist</th>
                             <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
+                            @if( Auth::user()->role == 'admin' )
+                                <th scope="col">Delete</th>
+                            @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -36,13 +38,15 @@
                                     <td>
                                         <a href="album/{{ $a->id }}/edit" class="btn btn-info">Edit</button>
                                     </td>
-                                    <td>
-                                        <form action="albums/delete/{{ $a->id }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
+                                    @if( Auth::user()->role == 'admin' )
+                                        <td>
+                                            <form action="albums/delete/{{ $a->id }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
