@@ -19,10 +19,10 @@ use App\Http\Controllers\ArtistListController;
 Route::group(['middleware' => 'web'], function () {
     Route::get('/', [HomeController::class, 'index']);
     Auth::routes();
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
-Route::group(['middleware' => 'auth'], function () { 
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', [ArtistListController::class, 'index']);
     Route::get('/albums', [AlbumController::class, 'index']);
     Route::get('/albums/new', [AlbumController::class, 'new']);
     Route::post('/albums/create', [AlbumController::class, 'create']);

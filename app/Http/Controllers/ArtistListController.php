@@ -32,4 +32,16 @@ class ArtistListController extends Controller
         }
         return $array;
     }
+
+    public function index() {
+        $json = Http::withHeaders([
+            'Basic' => 'ZGV2ZWxvcGVyOlpHVjJaV3h2Y0dWeQ=='
+        ])->get('https://moat.ai/api/task/')->json();
+        $array = array();
+        foreach($json as $data) {
+            $array[] = $data[0];
+        }
+        return view('home', ['artistList' => $array]);
+    }
+
 }
