@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 <label>Artist</label>
                                 <select class="form-control" name="artist">
-                                    <option selected>Open this select menu</option>
+                                    <option selected>Select an artist</option>
                                     @foreach( $artistList as $a )
                                         <option value="{{ $a['id'] }}">{{ $a['name'] }}</option>
                                     @endforeach
