@@ -8,7 +8,7 @@ Please check the official laravel installation guide for server requirements bef
 
 Clone the repository
 
-    git clone git@github.com:luisferrassini/music-collection-app.git
+    git clone https://github.com/luisferrassini/music-collection-app.git
     
 Switch to the repo folder
 
@@ -34,7 +34,7 @@ You can now access the server at http://localhost:8000
 
 **TL;DR command list**
 
-    git clone git@github.com:luisferrassini/music-collection-app.git
+    git clone https://github.com/luisferrassini/music-collection-app.git
     cd music-collection-app
     composer install
     cp .env.example .env
