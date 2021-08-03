@@ -10,8 +10,8 @@ class ArtistListController extends Controller
 {
     public function getList() {
         $json = Http::withHeaders([
-            'Basic' => 'ZGV2ZWxvcGVyOlpHVjJaV3h2Y0dWeQ=='
-        ])->get('https://moat.ai/api/task/')->json();
+            'Basic' => env('ARTIST_LIST_API_KEY', false)
+        ])->get(env('ARTIST_LIST_API_URL', false))->json();
         $array = array();
         foreach($json as $data) {
             $array[] = $data[0];
@@ -21,8 +21,8 @@ class ArtistListController extends Controller
 
     public function get($id) {
         $json = Http::withHeaders([
-            'Basic' => 'ZGV2ZWxvcGVyOlpHVjJaV3h2Y0dWeQ=='
-        ])->get('https://moat.ai/api/task/?id='.$id)->json(); // API não retorna como esperado
+            'Basic' => env('ARTIST_LIST_API_KEY', false)
+        ])->get(env('ARTIST_LIST_API_URL', false).$id)->json(); // API não retorna como esperado
         $array = array();
         foreach($json as $data) {
             if($data[0]['id'] == $id) {
@@ -35,8 +35,8 @@ class ArtistListController extends Controller
 
     public function index() {
         $json = Http::withHeaders([
-            'Basic' => 'ZGV2ZWxvcGVyOlpHVjJaV3h2Y0dWeQ=='
-        ])->get('https://moat.ai/api/task/')->json();
+            'Basic' => env('ARTIST_LIST_API_KEY', false)
+        ])->get(env('ARTIST_LIST_API_URL', false))->json();
         $array = array();
         foreach($json as $data) {
             $array[] = $data[0];
