@@ -10,11 +10,17 @@ class AlbumController extends Controller
 {
     public function index() {
         $albums = Album::get();
+        $artistListController = new ArtistListController;
+        foreach($albums as $a) {
+            $a->artist = $artistListController->get($a->artist)[0]['name'];
+        }
         return view('albums.list', ['albums' => $albums]);
     }
 
     public function new() {
-        return view('albums.form');
+        $artistListController = new ArtistListController;
+        $artistList = $artistListController->getList();
+        return view('albums.form', ['artistList' => $artistList]);
     }
 
     public function create(Request $request) {
@@ -25,7 +31,10 @@ class AlbumController extends Controller
 
     public function edit($id) {
         $album = Album::findOrFail($id);
-        return view('albums.form', ['album' => $album]);
+        $artistListController = new ArtistListController;
+        $artistList = $artistListController->getList();
+        $artistName = $artistListController->get($album->artist)[0]['name'];
+        return view('albums.form', ['album' => $album, 'artistList' => $artistList, 'artistName' => $artistName]);
     }
 
     public function update(Request $request, $id) {

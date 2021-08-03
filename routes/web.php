@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\ArtistListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,5 @@ Route::post('/albums/create', [AlbumController::class, 'create'])->middleware('a
 Route::get('/album/{id}/edit', [AlbumController::class, 'edit'])->middleware('auth');
 Route::post('/albums/update/{id}', [AlbumController::class, 'update'])->middleware('auth');
 Route::delete('/albums/delete/{id}', [AlbumController::class, 'delete'])->middleware('auth');
+Route::get('/artistList', [ArtistListController::class, 'getList'])->middleware('auth');
+Route::get('/artist/{id}', [ArtistListController::class, 'get'])->middleware('auth');

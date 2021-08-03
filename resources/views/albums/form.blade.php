@@ -15,8 +15,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-
+                    
                     @if( Request::is('*/edit'))
                         <form action="{{ url('albums/update') }}/{{ $album->id }}" method="post">
                             @csrf
@@ -26,13 +25,20 @@
                             </div>
 
                             <div class="form-group">
-                                <label>E-mail:</label>
-                                <input type="number" name="email" class="form-control" value="{{ $album->year }}">
+                                <label>Year:</label>
+                                <input type="number" name="year" class="form-control" value="{{ $album->year }}">
                             </div>
 
                             <div class="form-group">
-                                <label>Artist:</label>
-                                <input type="text" name="artist" class="form-control" value="{{ $album->artist }}">
+                                <label>Artist</label>
+                                <select class="form-control" name="artist">
+                                    <option value="{{ $album->artist }}" selected>{{ $artistName }}</option>
+                                    @foreach( $artistList as $a )
+                                        @if($a['id'] != $album->artist)
+                                            <option value="{{ $a['id'] }}">{{ $a['name'] }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Update</button>
@@ -50,10 +56,15 @@
                                 <label>Year:</label>
                                 <input type="number" name="year" class="form-control" value={{ now()->year }}>
                             </div>
-
+                            
                             <div class="form-group">
-                                <label>Artist:</label>
-                                <input type="text" name="artist" class="form-control">
+                                <label>Artist</label>
+                                <select class="form-control" name="artist">
+                                    <option selected>Open this select menu</option>
+                                    @foreach( $artistList as $a )
+                                        <option value="{{ $a['id'] }}">{{ $a['name'] }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Create</button>
