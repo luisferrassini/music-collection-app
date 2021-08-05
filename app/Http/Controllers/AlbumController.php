@@ -25,6 +25,10 @@ class AlbumController extends Controller
     }
 
     public function create(Request $request) {
+        if($request->all()['name'] == NULL)
+            return Redirect::to('/albums/new');
+        if($request->all()['artist'] == '-1')
+            return Redirect::to('/albums/new');
         $album = new Album;
         $album = $album->create($request->all());
         return Redirect::to('/albums');
@@ -39,6 +43,8 @@ class AlbumController extends Controller
     }
 
     public function update(Request $request, $id) {
+        if($request->all()['name'] == NULL)
+            return Redirect::to('/album/'.$id.'/edit');
         $album = Album::findOrFail($id);
         $album->update($request->all());
         return Redirect::to('/albums');
